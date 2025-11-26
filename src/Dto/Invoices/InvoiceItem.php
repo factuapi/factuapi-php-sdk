@@ -14,6 +14,8 @@ class InvoiceItem
         public float $amount,
         public ?float $equivalenceSurchargeType = null,
         public ?float $equivalenceSurchargePrice = null,
+        public ?ExemptionReason $exemptionReason = null,
+        public ?OperationQualification $operationQualification = null,
     ) {
     }
 }

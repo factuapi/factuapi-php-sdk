@@ -140,6 +140,70 @@ $factuapi
   );
 ```
 
+#### IVA exempt invoice
+
+For invoices that are exempt from IVA (Spanish VAT), you need to specify an exemption reason using the `ExemptionReason` enum. Set the `taxRate` to 0, include the appropriate `exemptionReason` value, and ensure `taxPrice` is also 0. The available exemption reasons correspond to specific articles in Spanish tax law (Article 20, 21, 22, 23/24, 25, or Other).
+
+
+
+```php
+use Factuapi\PhpSdk\Dto\Invoices\Invoice;
+use Factuapi\PhpSdk\Dto\Invoices\InvoiceId;
+use Factuapi\PhpSdk\Dto\Invoices\InvoiceLine;
+use Factuapi\PhpSdk\Dto\Invoices\InvoiceType;
+use Factuapi\PhpSdk\Dto\Invoices\ExemptionReason;
+use Factuapi\PhpSdk\Dto\Invoices\TaxType;
+use Factuapi\PhpSdk\Dto\Invoices\RegimeKeyIVA;
+
+$factuapi
+  ->invoices()
+  ->create(
+    invoice: new Invoice(
+      invoiceId: new InvoiceId(
+        seriesCode: "2025",
+        number: "110",
+      )
+      issueDate: new DateTime("2025-11-14"),
+      invoiceType: InvoiceType::Invoice,
+      issuer: new Issuer(
+        taxNumber: "B12345678",
+        name: "Example Company SL",
+        address: "C/ Example Street 123",
+        postCode: "08001",
+        city: "Barcelona",
+        province: "Barcelona"
+      ),
+      recipient: new SpanishRecipient(
+        taxNumber: "B87654321",
+        name: "Client Company SL",
+        address: "Av. Client 456",
+        postCode: "08002",
+        city: "Barcelona",
+        province: "Barcelona"
+      ),
+      items: [
+        new InvoiceItem(
+          description: "Item description",
+          basePrice: 100,
+          taxType: TaxType::IVA,
+          regimeKey: RegimeKeyIVA::General,
+          taxRate: 0,
+          exemptionReason: ExemptionReason::Article20,
+          taxPrice: 0,
+          amount: 100
+        )
+      ],
+      totals: new InvoiceTotals(
+        basePrice: 100,
+        taxPrice: 0,
+        amount: 100
+      ),
+      itemDescription: "Invoice description"
+    ),
+    process: ["verifactu"]
+  );
+```
+
 #### VIES VAT number
 
 For intra-community invoices with VIES VAT numbers, use the `OtherRecipient` class with the appropriate country code and ID type:
