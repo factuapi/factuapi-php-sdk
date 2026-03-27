@@ -1,0 +1,13 @@
+{
+    "message": "Invoice created successfully",
+    "invoice": {
+        "invoice_series_code": "TEST",
+        "invoice_number": "1"
+    },
+    "data": {
+        "id": "abc123"
+    },
+    "processes": [
+        {"name": "verifactu", "status": "pending"}
+    ]
+}

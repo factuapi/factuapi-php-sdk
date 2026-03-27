@@ -10,3 +10,5 @@ tests/ApiTest.php
 .phpunit.cache
 tests/TestSupport/.env
 examples.md
+.claude
+.idea
