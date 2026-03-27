@@ -65,7 +65,7 @@ class CreateInvoiceRequest extends Request implements HasBody
                     $item["equivalence_surcharge_type"] = $invoiceItem->equivalenceSurchargeType;
                 }
 
-                if ($invoiceItem->equivalenceSurchargeType) {
+                if ($invoiceItem->equivalenceSurchargePrice) {
                     $item["equivalence_surcharge_price"] = $invoiceItem->equivalenceSurchargePrice;
                 }
 
