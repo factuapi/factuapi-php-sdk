@@ -61,19 +61,19 @@ class CreateInvoiceRequest extends Request implements HasBody
                     "amount" => $invoiceItem->amount,
                 ];
 
-                if ($invoiceItem->equivalenceSurchargeType) {
+                if ($invoiceItem->equivalenceSurchargeType !== null) {
                     $item["equivalence_surcharge_type"] = $invoiceItem->equivalenceSurchargeType;
                 }
 
-                if ($invoiceItem->equivalenceSurchargeType) {
+                if ($invoiceItem->equivalenceSurchargePrice !== null) {
                     $item["equivalence_surcharge_price"] = $invoiceItem->equivalenceSurchargePrice;
                 }
 
-                if ($invoiceItem->exemptionReason) {
+                if ($invoiceItem->exemptionReason !== null) {
                     $item["exemption_reason"] = $invoiceItem->exemptionReason->value;
                 }
 
-                if ($invoiceItem->operationQualification) {
+                if ($invoiceItem->operationQualification !== null) {
                     $item["operation_qualification"] = $invoiceItem->operationQualification->value;
                 }
 
